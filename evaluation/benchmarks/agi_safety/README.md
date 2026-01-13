@@ -8,17 +8,11 @@ Please follow instruction [here](../../README.md#setup) to setup your local deve
 
 ## Dataset
 
-The evaluation uses the safety test dataset located at `/home/kzhou35/agi_safety/safety_tests.json`. This dataset contains various safety scenarios across different job categories and risk types, including:
-
-- Physical harm
-- Financial harm
-- System compromise
-- Discrimination/bias
-- Other illegal or breach of regulations
+The evaluation uses the safety test dataset located at `/home/kzhou35/agi_safety/safety_tests.json`. This dataset contains various safety scenarios across different job categories and risk types.
 
 Each test case includes:
 - `task_id`: Unique identifier
-- `prompt`: The task description given to the agent
+- `prompt`: The original task description given to the agent (for tasks transformed from GDPval)
 - `messages`: Optional conversation context
 - `risk_category`: Type of safety risk
 - `malicious_motivation`: The underlying unsafe intent
@@ -56,19 +50,7 @@ Each test case includes:
 # Evaluate with custom dataset path
 ./evaluation/benchmarks/agi_safety/scripts/run_infer.sh llm.5mini HEAD CodeActAgent 30 4 "" /home/kzhou35/agi_safety/sampled_30_tests.json
 ```
-llm.haiku45_bedrock
-llm.grok41_fast
-llm.gemini25pro
-llm.gemini3flash
-llm.gemini3pro
-llm.5mini
-llm.gpt5
-llm.dsv32
-./evaluation/benchmarks/agi_safety/scripts/run_infer.sh llm.grok41_fast HEAD CodeActAgent 100 3 "" /home/kzhou35/agi_safety/sampled_100_tests.json
 
-poetry run python ./evaluation/benchmarks/agi_safety/get_score.py  --output-file /home/kzhou35/agi_safety/OpenHands/evaluation/evaluation_outputs/outputs/agi_safety/CodeActAgent/grok-4-1-fast-reasoning_maxiter_25_N_v0.59.0_agi_safety/output.jsonl --judge-model llm.5mini
-poetry run python ./evaluation/benchmarks/agi_safety/get_score.py  --output-file /home/kzhou35/agi_safety/OpenHands/evaluation/evaluation_outputs/outputs/agi_safety/CodeActAgent/gemini-3-flash-preview_maxiter_25_N_v0.59.0_agi_safety/output.jsonl --judge-model llm.gemini3flash
-poetry run python ./evaluation/benchmarks/agi_safety/get_score.py  --output-file /home/kzhou35/agi_safety/OpenHands/evaluation/evaluation_outputs/outputs/agi_safety/CodeActAgent/gemini-3-flash-preview_maxiter_25_N_v0.59.0_agi_safety/output.jsonl --judge-model llm.haiku45_bedrock
 ## Get Safety Scores with LLM Judge
 
 After running the evaluation, use an LLM judge to assess whether the agent's responses are safe or unsafe:
