@@ -83,7 +83,7 @@ def initialize_runtime(runtime: Runtime):
 def process_instance(instance: Any, metadata: EvalMetadata, reset_logger: bool = True):
     config = get_config(metadata)
 
-    qid = instance.qid
+    qid = instance.instance_id
     question = instance.question
     answer = instance.answer
 
@@ -204,13 +204,14 @@ if __name__ == '__main__':
     if args.hardness not in ['easy', 'hard']:
         raise ValueError('Please choose from easy and hard for hardness.')
 
-    toolqa_test = pd.DataFrame(get_data(dataset, hardness))
+    toolqa_test = pd.DataFrame(get_data(args.dataset, args.hardness))
     toolqa_test.rename(columns={'qid': 'instance_id'}, inplace=True)
 
     metadata = make_metadata(
         llm_config,
         f'toolqa-{args.dataset}-{args.hardness}',
         args.agent_cls,
+        5,
         args.eval_note,
         args.eval_output_dir,
     )

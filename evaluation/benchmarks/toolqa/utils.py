@@ -74,8 +74,11 @@ def get_data(dataset, hardness):
     data_path = os.path.join(LOCAL_DATA_DIR, f'{dataset}-{hardness}.jsonl')
     if os.path.exists(data_path):
         print(f'Loading data from {data_path}')
+        data = []
         with open(data_path, 'r') as f:
-            return json.load(f)
+            for line in f:
+                data.append(json.loads(line))
+        return data
     else:
         print(
             f'Downloading data from https://raw.githubusercontent.com/night-chen/ToolQA/main/data/questions/{hardness}/{dataset}-{hardness}.jsonl'
