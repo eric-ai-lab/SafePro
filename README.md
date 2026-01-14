@@ -11,7 +11,7 @@
 <img src="./figures/fig1.png" alt="main" style="zoom: 33%;" />
 
 ## Quick Start
-Please follow the instruction [here](https://github.com/OpenHands/OpenHands/tree/0.59.0) to set up the environment for OpenHands, and LLM info in config.toml.
+This repo is based on a fork of OpenHands. Please follow the instruction [here](https://github.com/OpenHands/OpenHands/tree/0.59.0) to set up the environment for OpenHands, and LLM info in config.toml.
 
 The SafePro dataset is [here](safepro_v0.json).
 Follow the instructions [here](evaluation/benchmarks/agi_safety/README.md) to test LLM agents on SafePro and get the safety evaluation results.
